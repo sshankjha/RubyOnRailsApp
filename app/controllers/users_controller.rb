@@ -4,13 +4,19 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    if current_user
+      @user = User.find_by(id: current_user[:id])
+    end
   end
 
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    if current_user
+      @user = User.find_by(id: current_user[:id])
+    else
+      @user = User.find(params[:id])
+    end
   end
 
   # GET /users/new
@@ -28,7 +34,6 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       log_in @user
-      flash[:success] = "Welcome to the Bank"
       redirect_to @user
     else
       render 'new'

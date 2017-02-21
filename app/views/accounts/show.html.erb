@@ -1,20 +1,30 @@
 <p id="notice"><%= notice %></p>
-<p>Requested Account Info</p>
-<p>
-  <strong>Acc no:</strong>
-  <%= @account.acc_no %>
-</p>
 
-<p>
-  <strong>Balance:</strong>
-  <%= @account.balance %>
-</p>
+<h1>Accounts</h1>
 
-<p>
-  <strong>State:</strong>
-  <%= @account.state %>
-</p>
+<table>
+  <thead>
+  <tr>
+    <th>Acc no</th>
+    <th>Balance</th>
+    <th>State</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
 
+  <tbody>
+  <% @accounts.each do |account| %>
+      <tr>
+        <td><%= account.acc_no %></td>
+        <td><%= account.balance %></td>
+        <td><%= account.state %></td>
+        <td><%= link_to 'Show', account %></td>
+        <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
 
+<br>
 
-<%= link_to 'Back', accounts_path %>
+<%= link_to 'Back', user_path %>
