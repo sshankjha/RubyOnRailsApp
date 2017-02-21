@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'sessions/new'
-    
+
   resources :accounts
   resources :users
   root  'sessions#new'
