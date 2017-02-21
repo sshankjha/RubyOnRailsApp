@@ -1,11 +1,14 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_user, only: [:edit, :update, :destroy]
 
   # GET /users
   # GET /users.json
   def index
     if current_user
-      @user = User.find_by(id: current_user[:id])
+      @users = User.find_by(id: current_user[:id])
+
+    else
+      @users = User.all
     end
   end
 
