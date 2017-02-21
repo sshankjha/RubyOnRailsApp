@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+<p>Requested Account Info</p>
+<p>
+  <strong>Acc no:</strong>
+  <%= @account.acc_no %>
+</p>
+
+<p>
+  <strong>Balance:</strong>
+  <%= @account.balance %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @account.state %>
+</p>
+
+
+
+<%= link_to 'Back', accounts_path %>
