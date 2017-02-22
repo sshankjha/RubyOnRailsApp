@@ -18,10 +18,10 @@
         <td><%= account.acc_no %></td>
         <td><%= account.balance %></td>
         <td><%= account.state %></td>
-        <td><%= link_to 'Withdraw', user_path, method: :post, params: {:id => account.id, :type => 0, :from => account.acc_no, :to => account.acc_no} %></td>
-        <td><%= link_to 'Deposit', user_path, method: :post, params: {:id => account.id, :type => 1, :from => account.acc_no, :to => account.acc_no}%></td>
-        <td><%= link_to 'Transfer', user_path, methond: :post, params: {:id => account.id, :type => 2, :from => account.acc_no, :to => account.acc_no}%></td>
-        <td><%= link_to 'Destroy', account, method: :post, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Withdraw', user_path(:id => account.id, :type => 0, :from => account.acc_no, :to => account.acc_no) %></td>
+        <td><%= link_to 'Deposit', user_path(:id => account.id, :type => 1, :from => account.acc_no, :to => account.acc_no)%></td>
+        <td><%= link_to 'Transfer', user_path(:id => account.id, :type => 2, :from => account.acc_no, :to => account.acc_no)%></td>
+        <td><%= link_to 'Destroy', account, data: { confirm: 'Are you sure?' } %></td>
       </tr>
   <% end %>
   </tbody>

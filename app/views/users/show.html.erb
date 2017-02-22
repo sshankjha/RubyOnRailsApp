@@ -16,10 +16,15 @@
   <%= @user.phone %>
 </p>
 
+
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Request for an account', new_account_url %>
-
 <%= link_to 'View your accounts', account_path %>
+
+<p>
+  <%= link_to 'View your Friends', friends_path(@user)%>
+</p>
+
 
 <p>
   <%= link_to 'Logout', logout_path, :method =>:post%>

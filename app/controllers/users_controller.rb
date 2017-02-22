@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   # GET /users/1.json
   def show
     if current_user
+      puts params
       @user = User.find_by(id: current_user[:id])
     else
       flash[:notice] = "Please Login"
@@ -28,7 +29,16 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
+  # GET /friends/1
+  def show_friends
+    if current_user
+      @friends = Friend.where(user_id: current_user[:id])
+    else
+      flash[:notice] = "Please Login"
+      redirect_to root_path
+    end
 
+  end
   # GET /users/1/edit
   def edit
   end

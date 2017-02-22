@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'sessions/new'
+  get 'friends/:id', to: 'users#show_friends', as: 'friends'
   resources :accounts
   resources :users
   root  'sessions#new'

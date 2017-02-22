@@ -6,5 +6,7 @@ class User < ApplicationRecord
   has_secure_password
   validates :phone, presence: true, length: {minimum: 10, maximum: 10}
   validates :password_digest, presence: true, length: {minimum: 4}
+  has_many :accounts
+  has_many :friends
 
 end
