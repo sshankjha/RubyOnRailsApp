@@ -1,5 +1,5 @@
 class AccountsController < ApplicationController
-
+  protect_from_forgery with: :null_session
   include SessionsHelper
   # GET /accounts
   # GET /accounts.json
@@ -7,6 +7,7 @@ class AccountsController < ApplicationController
     if current_user and Account.find_by_user_id(current_user[:id])
       @accounts = Account.where(current_user[:id])
     else
+      flash[:notice] = 'No accounts to View. Request one'
       redirect_to user_path, {:id => current_user[:id]}
     end
   end
@@ -30,10 +31,9 @@ class AccountsController < ApplicationController
   # POST /accounts
   # POST /accounts.json
   def create
-    @account = Account.new(acc_no: rand(),balance: 0.0, state: 0, user_id: current_user[:id])
+    @account = Account.new(acc_no: 100_000_000 + Random.rand(99_999_999) ,balance: 0.0, state: 0, user_id: current_user[:id])
     respond_to do |format|
       if @account.save
-        @account.update_attributes(acc_no: @account[:id])
         format.html { redirect_to @account, notice: 'Account was successfully requested' }
         format.json { render :show, status: :created, location: @account }
       else
@@ -61,10 +61,10 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1
   # DELETE /accounts/1.json
   def destroy
-    @account = Account.find_by_acc_no(params[:id])
+    @account = Account.find(params[:id])
     @account.destroy
     respond_to do |format|
-      format.html { redirect_to user, notice: 'Account was successfully destroyed.' }
+      format.html { redirect_to user_path, notice: 'Account was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

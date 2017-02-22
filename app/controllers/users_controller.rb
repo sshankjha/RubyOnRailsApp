@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     if current_user
+      flash[:notice] = "Logged in"
       @users = User.find_by(id: current_user[:id])
     else
       redirect_to root_path
@@ -37,6 +38,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
+      flash[:notice] = "Profile Created: Request an account"
       log_in @user
       redirect_to @user
     else
