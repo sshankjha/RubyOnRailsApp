@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def index
     if current_user
       flash[:notice] = "Logged in"
-      @users = User.find_by(id: current_user[:id])
+      @users = User.all
     else
       redirect_to root_path
     end
@@ -37,7 +37,21 @@ class UsersController < ApplicationController
       flash[:notice] = "Please Login"
       redirect_to root_path
     end
+  end
 
+  def add_friends
+    if current_user
+      temp = Friend.new(user_id: current_user[:id], user_id2: params[:id])
+      if temp.save
+        flash[:notice] = "A new Friend added. Make a transfer"
+      else
+        flash[:notice] = "Friend not added"
+      end
+      redirect_to friends_path
+    else
+      flash[:notice] = "Please Login"
+      redirect_to root_path
+    end
   end
   # GET /users/1/edit
   def edit
