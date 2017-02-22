@@ -1,4 +1,5 @@
 <p id="notice"><%= notice %></p>
+<%= javascript_include_tag "application" %>
 
 <p>
   <strong>Name:</strong>
@@ -21,7 +22,7 @@
 <%= link_to 'View your accounts', account_path %>
 
 <p>
-  <%= link_to 'Logout', logout_path, method: :delete %>
+  <%= link_to 'Logout', logout_path, :method =>:post%>
 </p>
 
 

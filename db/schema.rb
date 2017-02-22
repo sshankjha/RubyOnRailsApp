@@ -30,7 +30,9 @@ ActiveRecord::Schema.define(version: 20170221040236) do
     t.string   "name",            null: false
     t.string   "email",           null: false
     t.string   "password_digest", null: false
-    t.integer  "phone"
+    t.string   "phone"
+    t.boolean  "is_admin"
+    t.boolean  "false"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

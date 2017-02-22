@@ -6,10 +6,10 @@ class UsersController < ApplicationController
   def index
     if current_user
       @users = User.find_by(id: current_user[:id])
-
     else
-      @users = User.all
+      redirect_to root_path
     end
+
   end
 
   # GET /users/1
@@ -18,7 +18,8 @@ class UsersController < ApplicationController
     if current_user
       @user = User.find_by(id: current_user[:id])
     else
-      @user = User.find(params[:id])
+      flash[:notice] = "Please Login"
+      redirect_to root_path
     end
   end
 
