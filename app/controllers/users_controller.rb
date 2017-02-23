@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     if current_user
-      @users = User.except(params[:id])
+      @users = User.except(id: current_user[:id])
     else
       redirect_to root_path
     end
@@ -35,12 +35,14 @@ class UsersController < ApplicationController
 
   def add_friends
     if current_user
-      puts params
-      temp = Friend.new(user_id: current_user[:id], friend_id: params[:id], fname: params[:name])
-      if temp.save
+
+      temp = Friend.where(user_id: current_user[:id], friend_id: params[:id], fname: params[:name])
+      if temp == nil?
+        friend = Friend.new(user_id: current_user[:id], friend_id: params[:id], fname: params[:name])
+        friend.save
         flash[:notice] = "A new Friend added. Make a transfer"
       else
-        flash[:notice] = "Friend not added"
+        flash[:notice] = "Already in your friends list"
       end
       redirect_to friends_path
     else
