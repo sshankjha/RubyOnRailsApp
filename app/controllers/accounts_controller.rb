@@ -19,7 +19,7 @@ class AccountsController < ApplicationController
       @accounts = Account.where(user_id: current_user[:id])
     else
       flash[:notice] = 'No accounts to View. Request one'
-      redirect_to user_path, {:id => current_user[:id]}
+      redirect_to user_path
     end
   end
 
