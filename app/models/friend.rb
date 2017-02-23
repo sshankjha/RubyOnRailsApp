@@ -1,4 +1,5 @@
-class Friend < ApplicationRecord
-  validates :user_id, presence: true
-  validates :user_id2, presence: true
+class Friend < ActiveRecord::Base
+  belongs_to :user
+  self.primary_key = :user_id
+  self.primary_key = :friend_id
 end

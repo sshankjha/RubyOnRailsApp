@@ -6,8 +6,7 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     if current_user
-      flash[:notice] = "Logged in"
-      @users = User.all
+      @users = User.except(params[:id])
     else
       redirect_to root_path
     end
@@ -36,7 +35,8 @@ class UsersController < ApplicationController
 
   def add_friends
     if current_user
-      temp = Friend.new(user_id: current_user[:id], user_id2: params[:id])
+      puts params
+      temp = Friend.new(user_id: current_user[:id], friend_id: params[:id], fname: params[:name])
       if temp.save
         flash[:notice] = "A new Friend added. Make a transfer"
       else

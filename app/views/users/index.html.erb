@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <h1>Add Friends</h1>
 
 <table>
@@ -13,12 +11,13 @@
   </thead>
 
   <tbody>
+
     <% @users.each do |user| %>
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.phone %></td>
-        <td><%= link_to 'Add', add_friends_path(user.id), method: :post %></td>
+        <td><%= link_to 'Add', add_friends_path(:id => user.id,:name => user.name), method: :post %></td>
       </tr>
     <% end %>
   </tbody>

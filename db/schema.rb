@@ -26,21 +26,20 @@ ActiveRecord::Schema.define(version: 20170222153137) do
     t.index ["user_id"], name: "index_accounts_on_user_id", using: :btree
   end
 
-  create_table "friends", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "user_id2", null: false
-    t.index ["user_id"], name: "index_friends_on_user_id", using: :btree
+  create_table "friends", primary_key: ["user_id", "friend_id"], force: :cascade do |t|
+    t.integer "user_id",   null: false
+    t.integer "friend_id", null: false
+    t.string  "fname",     null: false
   end
 
   create_table "users", force: :cascade do |t|
-    t.string   "name",            null: false
-    t.string   "email",           null: false
-    t.string   "password_digest", null: false
+    t.string   "name",                            null: false
+    t.string   "email",                           null: false
+    t.string   "password_digest",                 null: false
     t.string   "phone"
-    t.boolean  "is_admin"
-    t.boolean  "false"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.boolean  "is_admin",        default: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
   end
 
 end

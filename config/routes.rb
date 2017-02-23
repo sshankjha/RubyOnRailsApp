@@ -5,10 +5,10 @@ Rails.application.routes.draw do
   get 'admin/:id', to: 'admin#show', as: 'admin'
   resources :accounts
   resources :users
-  root 'static_pages#home'
   get '/contact', to: 'static_pages#contact'
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'
+  root 'sessions#new'
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout', to: 'sessions#log_out'

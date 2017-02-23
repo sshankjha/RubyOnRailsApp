@@ -8,5 +8,4 @@ class User < ApplicationRecord
   validates :password_digest, presence: true, length: {minimum: 4}
   has_many :accounts
   has_many :friends
-
 end
