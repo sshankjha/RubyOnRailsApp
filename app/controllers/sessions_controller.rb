@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(email: params[:session][:email].downcase)
     if user && user.is_admin
-      redirect_to root_path
+      redirect_to login_path
     else
       if user && user.authenticate(params[:session][:password])
         flash[:notice] = "Successfull login"

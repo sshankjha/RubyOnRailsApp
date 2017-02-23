@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :destroy]
-
+  before_action :logged_in_user, only: [:index, :edit, :update]
+  before_action :correct_user,   only: [:edit, :update]
   # GET /users
   # GET /users.json
   def index
@@ -16,13 +17,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    if current_user
-      puts params
-      @user = User.find_by(id: current_user[:id])
-    else
-      flash[:notice] = "Please Login"
-      redirect_to root_path
-    end
+    @user = User.find(params[:id])
   end
 
   # GET /users/new
@@ -87,15 +82,25 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
-    respond_to do |format|
-      format.html { redirect_to users_url, notice: 'User was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    User.find(params[:id]).destroy
+    redirect_to login_path
   end
 
   private
     # Use callbacks to share common setup or constraints between actions.
+  def logged_in_user
+    unless logged_in?
+      flash[:danger] = "Please log in."
+      redirect_to login_path
+    end
+  end
+
+  # Confirms the correct user.
+    def correct_user
+      @user = User.find(params[:id])
+      redirect_to(root_url) unless current_user?(@user)
+    end
+
     def set_user
       @user = User.find(params[:id])
     end
