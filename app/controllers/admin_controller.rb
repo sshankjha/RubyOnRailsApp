@@ -1,27 +1,22 @@
-class AdminsController < ApplicationController
+class AdminController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update]
   before_action :correct_user,   only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   before_action :admin_user,     only: :destroy
 
-  # GET /users
-  # GET /users.json
+
   def index
     @users = User.all
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
-    @users = User.find(params[:id])
+    @users = User.all
   end
 
-  # GET /users/new
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
   def edit
     @users = User.find(params[:id])
   end

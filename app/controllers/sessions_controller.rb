@@ -5,17 +5,18 @@ class SessionsController < ApplicationController
 
   def create
     user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.is_admin
-      redirect_to login_path
-    else
-      if user && user.authenticate(params[:session][:password])
-        flash[:notice] = "Successfull login"
+    if user && user.authenticate(params[:session][:password])
+      flash[:notice] = "Successfull login"
+      if user.is_admin
+        log_in user
+        redirect_to admin_path(user.id)
+      else
         log_in user
         redirect_to user
-      else
-        flash[:notice] = "Wrong Credentials"
-        render 'new'
       end
+    else
+      flash[:notice] = "Wrong credentials"
+      render 'new'
     end
 
   end
