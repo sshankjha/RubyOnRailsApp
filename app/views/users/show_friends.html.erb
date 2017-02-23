@@ -1,0 +1,26 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Show Friends</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>My ID</th>
+    <th>My friend ID</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @friends.each do |friend| %>
+      <tr>
+        <td><%= friend.user_id %></td>
+        <td><%= friend.user_id2 %></td>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<p>
+  <%= link_to 'Add Friends', users_path %>
+</p>
