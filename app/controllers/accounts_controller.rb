@@ -77,6 +77,11 @@ class AccountsController < ApplicationController
     end
   end
 
+  def state_change_account
+    @account = Account.find(params[:id])
+    @account.update_attributes(state: params[:chg_state])
+    redirect_to show_accounts_path
+  end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_account

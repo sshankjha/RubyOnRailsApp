@@ -10,7 +10,6 @@ class AdminController < ApplicationController
   end
 
   def show
-    @users = User.all
   end
 
   def new
@@ -44,6 +43,11 @@ class AdminController < ApplicationController
     else
       render 'edit'
     end
+  end
+
+  def show_accounts
+    @pending_accounts = Account.where(state: :inactive)
+    @activated_accounts = Account.where(state: :active)
   end
 
   # DELETE /users/1
