@@ -34,8 +34,7 @@ class UsersController < ApplicationController
   end
 
   def add_friends
-    if current_user
-
+    if logged_in?
       temp = Friend.where(user_id: current_user[:id], friend_id: params[:id], fname: params[:name])
       if temp == nil?
         friend = Friend.new(user_id: current_user[:id], friend_id: params[:id], fname: params[:name])
@@ -100,7 +99,7 @@ class UsersController < ApplicationController
   # Confirms the correct user.
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
+      redirect_to(login_path) unless current_user?(@user)
     end
 
     def set_user
