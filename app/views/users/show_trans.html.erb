@@ -1,0 +1,32 @@
+<h1>My Transactions</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th class="col1">From</th>
+    <th class="col1">To</th>
+    <th class="col1">Amount</th>
+    <th class="col1">Type</th>
+    <th class="col1">Status</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% if @transactions %>
+      <% @transactions.each do |transaction| %>
+          <tr>
+            <td><%= transaction.from %></td>
+            <td><%= transaction.to %></td>
+            <td><%= transaction.amount%></td>
+            <td><%= transaction.type%></td>
+            <td><%= transaction.status%></td>
+          </tr>
+      <% end %>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+<p>
+  <%= link_to 'Back', users_path %>
+</p>

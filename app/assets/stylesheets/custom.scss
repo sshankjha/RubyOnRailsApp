@@ -14,7 +14,9 @@ section {
 textarea {
   resize: vertical;
 }
-
+.col1 {
+  width: 13%;
+}
 .center {
   text-align: center;
 }
@@ -170,3 +172,4 @@ input {
     color: $state-danger-text;
   }
 }
+

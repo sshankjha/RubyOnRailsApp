@@ -19,6 +19,7 @@
         <td><%= link_to 'Withdraw', user_path(:id => account.id, :type => 0, :from => account.acc_no, :to => account.acc_no) %></td>
         <td><%= link_to 'Deposit', user_path(:id => account.id, :type => 1, :from => account.acc_no, :to => account.acc_no)%></td>
         <td><%= link_to 'Transfer', user_path(:id => account.id, :type => 2, :from => account.acc_no, :to => account.acc_no)%></td>
+        <td><%= link_to 'View Transactions', view_trans_path() %></td>
         <td><%= link_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
   <% end %>

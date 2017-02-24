@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:edit, :update, :destroy]
-  before_action :logged_in_user, only: [:index, :edit, :update]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :logged_in_user, only: [:show, :index, :edit, :update]
+  before_action :correct_user,   only: [:show, :edit, :update]
   # GET /users
   # GET /users.json
   def index
-    if current_user
+    if logged_in?
       @users = User.except(id: current_user[:id])
     else
       redirect_to root_path
@@ -25,13 +25,23 @@ class UsersController < ApplicationController
   end
   # GET /friends/1
   def show_friends
-    if current_user
+    if logged_in?
       @friends = Friend.where(user_id: current_user[:id])
     else
       flash[:notice] = "Please Login"
       redirect_to root_path
     end
   end
+
+
+  def show_trans
+    if logged_in?
+      @transactions = Transaction.where(user_id: params[:id])
+    else
+      redirect_to login_path
+    end
+  end
+
 
   def add_friends
     if logged_in?

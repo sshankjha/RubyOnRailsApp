@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   get  '/signup',  to: 'users#new'
   post '/signup',  to: 'users#create'
   root 'sessions#new'
+  get '/viewtrans/:id', to:'accounts#view_trans', as: 'view_trans'
+  get '/showtrans/:id', to: 'users#show_trans', as: 'show_trans'
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
   delete '/logout', to: 'sessions#log_out'
