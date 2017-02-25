@@ -10,7 +10,7 @@
       </ul>
     </div>
   <% end %>
-
+  <div>
   <div class="field">
     <%= f.label :name %>
     <%= f.text_field :name %>
@@ -30,8 +30,12 @@
     <%= f.label :phone %>
     <%= f.number_field :phone %>
   </div>
-
+  <% if logged_in? and current_user[:is_admin] == true %>
+        <%= f.label :is_admin %>
+        <%= f.check_box :is_admin, {}, true, false %>
+    <% end %>
   <div class="actions">
     <%= f.submit %>
+  </div>
   </div>
 <% end %>

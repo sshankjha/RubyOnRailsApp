@@ -1,6 +1,8 @@
 <%= javascript_include_tag "application" %>
 
+<div class="col-sm-6">
 <div class="jumbotron">
+
   <p>
     <strong>Name:</strong>
     <%= @user.name %>
@@ -15,12 +17,18 @@
     <strong>Phone:</strong>
     <%= @user.phone %>
   </p>
+  </div>
 </div>
 
-
+<div class="col-sm-4">
+  <br><br>
 <%= button_to "Show All Accounts", show_accounts_path, method: :get, class: "btn btn-primary custom3"%>
 <br>
 <%= button_to "Show Pending Transactions", show_ptrans_path, method: :get, class: "btn btn-primary custom3"%>
+  <br>
+  <%= button_to "Create Admin", signup_path, method: :get, class: "btn btn-primary custom3"%>
+</div>
+
 
 
 

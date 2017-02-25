@@ -1,8 +1,10 @@
 Rails.application.routes.draw do
   get 'sessions/new'
-  get 'friends/:id', to: 'users#show_friends', as: 'friends'
-  post 'friends/:id', to: 'users#add_friends', as: 'add_friends'
+  get '/friends/:id', to: 'users#show_friends', as: 'friends'
+  post '/friends/:id', to: 'users#add_friends', as: 'add_friends'
   get 'admin/:id', to: 'admin#show', as: 'admin'
+  get '/admin/new', to: 'admin#new', as: 'new_admin'
+  post '/admin', to: 'admin#create', as: 'admins'
   resources :accounts
   resources :users
   get '/contact', to: 'static_pages#contact'

@@ -69,9 +69,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      flash[:notice] = "Profile Created: Request an account"
-      log_in @user
-      redirect_to @user
+      if logged_in? and current_user[:is_admin]
+        redirect_to admin_path(current_user[:id])
+      else
+        log_in @user
+        redirect_to @user
+      end
     else
       render 'new'
     end
@@ -119,6 +122,6 @@ class UsersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
-      params.require(:user).permit(:name, :email, :password, :phone)
+      params.require(:user).permit(:name, :email, :password, :phone, :is_admin)
     end
 end

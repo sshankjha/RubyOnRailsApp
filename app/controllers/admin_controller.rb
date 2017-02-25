@@ -24,10 +24,11 @@ class AdminController < ApplicationController
   # POST /users.json
   def create
     @user = User.new(user_params)
+    @user.is_admin = true
     if @user.save
       log_in @user
       flash[:success] = "Welcome to the Bank App!"
-      redirect_to @user
+      redirect_to admin_path(current_user[:id])
     else
       render 'new'
     end

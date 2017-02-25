@@ -1,5 +1,6 @@
 <%= javascript_include_tag "application" %>
 
+<div class="col-sm-6">
 <div class="jumbotron">
   <p>
     <strong>Name:</strong>
@@ -16,7 +17,10 @@
     <%= @user.phone %>
   </p>
 </div>
+</div>
 
+<div class="col-sm-4">
+  <br><br>
 <div class="btn-group">
   <%= button_to 'Request for an account', new_account_url, method: :get, class: "btn btn-primary custom3" %>
   <br>
@@ -25,6 +29,7 @@
   <%= button_to 'View your Friends', friends_path(@user), method: :get, class: "btn btn btn-info custom3"%>
   <br>
   <%= button_to 'View all your transactions', show_trans_path(@user.id), method: :get, class: "btn btn btn-info custom3"%>
+</div>
 </div>
 
 
