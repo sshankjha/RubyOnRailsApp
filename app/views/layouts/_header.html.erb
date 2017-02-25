@@ -1,13 +1,13 @@
 <header class="navbar navbar-fixed-top navbar-inverse">
   <div class="container">
-    <% if User.find(current_user[:id]).is_admin%>
-      <%= link_to "Bank App", admin_path(current_user[:id]), id: "logo" %>
-    <% else %>
-       <%= link_to "Bank App", current_user, id: "logo" %>
-    <% end %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <% if logged_in? %>
+            <% if current_user[:is_admin] %>
+                <li><%= link_to "Home", admin_path(current_user[:id]) %></li>
+             <% else %>
+                <li><%= link_to "Home", current_user %></li>
+            <% end %>
                 <li><%= link_to "Edit Profile", edit_user_path(current_user) %></li>
                 <li>
                   <%= link_to "Log out", logout_path, method: :delete %>
