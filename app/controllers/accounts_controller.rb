@@ -64,14 +64,14 @@ class AccountsController < ApplicationController
     @account = Account.find(params[:id])
     @account.destroy
     respond_to do |format|
-      format.html { redirect_to user_path, notice: 'Account was successfully destroyed.' }
+      format.html { redirect_to current_user, notice: 'Account was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
 
   def view_trans
     if logged_in?
-      @transactions = Transaction.where(from: params[:id])
+      @transactions = Transaction.where(from: current_user[:id])
     else
       redirect_to login_path
     end

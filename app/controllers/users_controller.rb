@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   # GET /users/1
   # GET /users/1.json
   def show
-    @user = User.find(params[:id])
+    @user = User.find(current_user[:id])
   end
 
   # GET /users/new
@@ -111,7 +111,7 @@ class UsersController < ApplicationController
 
   # Confirms the correct user.
     def correct_user
-      @user = User.find(params[:id])
+      @user = User.find(current_user[:id])
       redirect_to(login_path) unless current_user?(@user)
     end
 
