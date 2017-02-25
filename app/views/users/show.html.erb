@@ -1,30 +1,31 @@
 <%= javascript_include_tag "application" %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<div class="jumbotron">
+  <p>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @user.phone %>
-</p>
-
-<div class="btn-group">
-  <%= link_to 'Request for an account', new_account_url %>
-  <br>
-  <%= link_to 'View your accounts', account_path %>
-  <br>
-  <%= link_to 'View your Friends', friends_path(@user)%>
-  <br>
-  <%= link_to 'View all your transactions', show_trans_path(@user.id)%>
+  <p>
+    <strong>Phone:</strong>
+    <%= @user.phone %>
+  </p>
 </div>
 
+<div class="btn-group">
+  <%= button_to 'Request for an account', new_account_url, method: :get, class: "btn btn-primary custom3" %>
+  <br>
+  <%= button_to 'View your accounts', account_path, method: :get, class: "btn btn-primary custom3" %>
+  <br>
+  <%= button_to 'View your Friends', friends_path(@user), method: :get, class: "btn btn btn-info custom3"%>
+  <br>
+  <%= button_to 'View all your transactions', show_trans_path(@user.id), method: :get, class: "btn btn btn-info custom3"%>
+</div>
 
 
 

@@ -11,7 +11,7 @@ Rails.application.routes.draw do
   get '/show_accounts', to: 'admin#show_accounts', as: 'show_accounts'
   get '/act_account/:id', to: 'accounts#state_change_account', as:'change_state_account'
   root 'sessions#new'
-  get '/viewtrans/:id', to:'accounts#view_trans', as: 'view_trans'
+  get '/view_trans/:id', to:'accounts#view_trans', as: 'view_trans'
   get '/showtrans/:id', to: 'users#show_trans', as: 'show_trans'
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
