@@ -1,23 +1,25 @@
 <%= javascript_include_tag "application" %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<div class="jumbotron">
+  <p>
+    <strong>Name:</strong>
+    <%= @user.name %>
+  </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+  <p>
+    <strong>Email:</strong>
+    <%= @user.email %>
+  </p>
 
-<p>
-  <strong>Phone:</strong>
-  <%= @user.phone %>
-</p>
-
-<div class="btn-group">
-  <%= link_to "Show User Accounts", show_accounts_path%>
+  <p>
+    <strong>Phone:</strong>
+    <%= @user.phone %>
+  </p>
 </div>
+
+
+<%= button_to "Show User Accounts", show_accounts_path, method: :get, class: "btn btn-primary custom3"%>
+
 
 
 
