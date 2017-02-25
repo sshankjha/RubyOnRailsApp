@@ -45,9 +45,32 @@ class AdminController < ApplicationController
     end
   end
 
+  def state_change_account
+    @account = Account.find(params[:id])
+    @account.update_attributes(state: params[:chg_state])
+    redirect_to show_accounts_path
+  end
+
   def show_accounts
     @pending_accounts = Account.where(state: :inactive)
     @activated_accounts = Account.where(state: :active)
+  end
+
+  def show_ptrans
+    @pending_accounts = Account.where(state: :pending)
+  end
+
+  def manage_transaction
+    @transaction = params[:t]
+    if params[:chg_state] == :rejected
+      @transaction.update_attributes(state: :rejected)
+    else
+      @transaction.update_attributes(state: :accepted)
+      @account = Account.find_by_acc_no(t.from)
+      curB = @account.balance
+      @account.update_attributes(balance: t.amount+curB)
+
+    end
   end
 
   # DELETE /users/1

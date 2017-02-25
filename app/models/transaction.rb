@@ -1,5 +1,5 @@
 class Transaction < ApplicationRecord
   belongs_to :user
-  enum state: [:pending, :rejected, :success]
+  enum state: [:pending, :rejected, :accepted]
 
 end

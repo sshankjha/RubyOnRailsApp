@@ -15,7 +15,7 @@
       <tr>
         <td><%= account.acc_no %></td>
         <td><%= account.balance %></td>
-        <td><%= account.state %></td>
+        <td><%= account.state.capitalize %></td>
         <% if account.state == 'active' %>
             <td><%= button_to 'Deposit', view_trans_path(), class: "btn btn-primary custom2" %></td>
             <td><%= button_to 'Withdraw', view_trans_path(), class: "btn btn-primary custom2" %></td>
@@ -29,4 +29,4 @@
 
 <br>
 
-<%= link_to 'Back', user_path %>
+<%= button_to 'Back', user_path, method: :get, class: "btn btn-primary col1" %>

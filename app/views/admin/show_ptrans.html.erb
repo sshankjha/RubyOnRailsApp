@@ -1,0 +1,31 @@
+<%if @pending_trans %>
+    <h1>Pending Transactions</h1>
+
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>From</th>
+        <th>To</th>
+        <th>Type</th>
+        <th>Amount</th>
+        <th colspan="4"></th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <% @pending_trans.each do |trans| %>
+          <tr>
+            <td><%=  trans.from %></td>
+            <td><%=  trans.to %></td>
+            <td><%=  trans.amount %></td>
+            <td><%=  trans.trans_type%></td>
+            <td><%= button_to 'Approve', manage_trans(id: trans.id, chg_state: :accepted, t: trans), method: :post, class: "btn btn-primary" %></td>
+            <td><%= button_to 'Reject', manage_trans(id: trans.id, chg_state: :rejected), method: :post, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
+<% else %>
+    <br>
+    <h1>No Pending Transactions</h1>
+<% end %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170224041830) do
+ActiveRecord::Schema.define(version: 20170225084720) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,12 +34,12 @@ ActiveRecord::Schema.define(version: 20170224041830) do
 
   create_table "transactions", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "from",    null: false
-    t.integer "to",      null: false
+    t.integer "from",       null: false
+    t.integer "to",         null: false
     t.integer "status"
     t.integer "0"
-    t.integer "type",    null: false
-    t.float   "amount",  null: false
+    t.integer "trans_type", null: false
+    t.float   "amount",     null: false
     t.index ["user_id"], name: "index_transactions_on_user_id", using: :btree
   end
 
