@@ -1,4 +1,4 @@
-<h1>Add Friends</h1>
+<h2>Add Friends</h2>
 
 <table>
   <thead>
@@ -17,7 +17,7 @@
         <td><%= user.name %></td>
         <td><%= user.email %></td>
         <td><%= user.phone %></td>
-        <td><%= link_to 'Add', add_friends_path(:id => user.id,:name => user.name), method: :post %></td>
+        <td><%= button_to 'Add', add_friends_path(:id => user.id,:name => user.name), method: :post, class: "btn btn-primary custom2" %></td>
       </tr>
     <% end %>
   </tbody>

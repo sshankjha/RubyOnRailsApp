@@ -56,7 +56,6 @@ class UsersController < ApplicationController
       end
       redirect_to friends_path
     else
-      flash[:notice] = "Please Login"
       redirect_to root_path
     end
   end
