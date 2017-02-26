@@ -7,9 +7,9 @@ class UsersController < ApplicationController
   # GET /users.json
   def index
     if logged_in?
-      @users = User.except(id: current_user[:id])
+      @users = User.where("id != ? AND is_admin = ?", current_user[:id], false)
     else
-      redirect_to root_path
+      redirect_to login_path
     end
 
   end
@@ -30,7 +30,7 @@ class UsersController < ApplicationController
       @friends = Friend.where(user_id: current_user[:id])
     else
       flash[:notice] = "Please Login"
-      redirect_to root_path
+      redirect_to login_path
     end
   end
 
@@ -46,17 +46,15 @@ class UsersController < ApplicationController
 
   def add_friends
     if logged_in?
-      temp = Friend.where(user_id: current_user[:id], friend_id: params[:id], fname: params[:name])
-      if temp == nil?
-        friend = Friend.new(user_id: current_user[:id], friend_id: params[:id], fname: params[:name])
-        friend.save
-        flash[:notice] = "A new Friend added. Make a transfer"
+      if Friend.exists?(user_id: current_user[:id],friend_id: params[:id], fname: params[:name])
+        redirect_to friends_path(current_user)
       else
-        flash[:notice] = "Already in your friends list"
+        f = Friend.new(user_id: current_user[:id],friend_id: params[:id], fname: params[:name])
+        if f.save
+          flash[:notice] = "New Friend Added"
+          redirect_to friends_path(current_user)
+        end
       end
-      redirect_to friends_path
-    else
-      redirect_to root_path
     end
   end
   # GET /users/1/edit
