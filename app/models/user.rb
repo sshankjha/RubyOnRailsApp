@@ -5,7 +5,8 @@ class User < ApplicationRecord
   validates :email , presence: true, length: { maximum:255 }, format: { with: VALID_EMAIL_REGEX }, uniqueness: {case_sensitive: false}
   has_secure_password
   validates :phone, presence: true, length: {minimum: 10, maximum: 10}
-  validates :password_digest, presence: true, length: {minimum: 4}
-  has_many :accounts
-  has_many :friends
+  validates :password, presence: true, length: { minimum: 4 }
+  has_many  :accounts
+  has_many  :friends
+
 end

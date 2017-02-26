@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  acc_no: 1
-  balance: 1.5
-  state: MyString
+  acc_no: 1111111112
+  balance: 11111
+  state: active
 
 two:
-  acc_no: 1
-  balance: 1.5
-  state: MyString
+  acc_no: 1111111111
+  balance: 22222
+  state: active
