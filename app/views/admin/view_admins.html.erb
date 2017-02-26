@@ -16,7 +16,7 @@
         <td><%=  admin.id %></td>
         <td><%=  admin.name %></td>
         <td><%=  admin.email %></td>
-        <% if admin.id != 1 %>
+        <% if admin.id != 7 %>
             <td><%= button_to 'Destroy', admin, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger custom2" %></td>
         <% end %>
       </tr>
