@@ -73,15 +73,9 @@ class AdminController < ApplicationController
 
     end
   end
-
-  # DELETE /users/1
-  # DELETE /users/1.json
-  def destroy
-    User.find(params[:id]).destroy
-    flash[:success] = "User deleted"
-    redirect_to users_url
+  def view_admins
+    @admins = User.where("id != ? AND is_admin = ?", current_user[:id], true)
   end
-
 
   private
   # Use callbacks to share common setup or constraints between actions.

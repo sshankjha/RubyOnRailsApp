@@ -47,6 +47,7 @@ class UsersController < ApplicationController
   def add_friends
     if logged_in?
       if Friend.exists?(user_id: current_user[:id],friend_id: params[:id], fname: params[:name])
+        flash[:notice] = "Friend already in your list"
         redirect_to friends_path(current_user)
       else
         f = Friend.new(user_id: current_user[:id],friend_id: params[:id], fname: params[:name])
@@ -95,7 +96,7 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     User.find(params[:id]).destroy
-    redirect_to login_path
+    redirect_to admin_path(current_user[:id])
   end
 
   private
@@ -106,6 +107,7 @@ class UsersController < ApplicationController
       redirect_to login_path
     end
   end
+
 
   # Confirms the correct user.
     def correct_user
