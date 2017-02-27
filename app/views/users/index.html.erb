@@ -1,27 +1,39 @@
-<h2>Add Friends</h2>
-
-<table>
-  <thead>
+<% provide(:title, 'All users') %>
+<h1>Add Friends</h1>
+<div>
+  <table>
+    <thead>
     <tr>
       <th>Name</th>
       <th>Email</th>
       <th>Phone</th>
       <th colspan="3"></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
-
+    <tbody>
     <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= user.email %></td>
-        <td><%= user.phone %></td>
-        <td><%= button_to 'Add', add_friends_path(:id => user.id,:name => user.name), method: :post, class: "btn btn-primary custom2" %></td>
-      </tr>
+        <tr>
+          <td><%= user.name %></td>
+          <td><%= user.email %></td>
+          <td><%= user.phone %></td>
+          <td><%= button_to 'Add', add_friends_path(:id => user.id, :name => user.name), method: :post, class: "btn btn-primary custom2" %></td>
+        </tr>
     <% end %>
-  </tbody>
-</table>
+    </tbody>
+  </table>
+</div>
 
-<br>
+
+<div>
+  <%= form_tag(users_path, method: :get) do %>
+      <div>
+        <%= text_field_tag :search, params[:search], placeholder: 'Search user by name or email'%>
+      </div>
+      <div>
+        <%= submit_tag 'Search', name: nil, class: 'btn btn-primary custom2' %>
+      </div>
+  <% end %>
+</div>
+
 

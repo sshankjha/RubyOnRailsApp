@@ -2,17 +2,39 @@ class UsersController < ApplicationController
   before_filter :logged_in_user
   before_action :set_user, only: [:edit, :update, :destroy]
   before_action :logged_in_user, only: [:show, :index, :edit, :update]
-  before_action :correct_user,   only: [:show, :edit, :update]
+  before_action :correct_user, only: [:show, :edit, :update]
   # GET /users
   # GET /users.json
+
   def index
     if logged_in?
-      @users = User.where("id != ? AND is_admin = ?", current_user[:id], false)
+      if params[:search].present?
+        @users = User.where('(name LIKE ? OR email LIKE ?) and id != ? AND is_admin = ?', params[:search].strip, params[:search].strip, current_user[:id], false)
+      else
+        @users = User.where('id != ? AND is_admin = ?', current_user[:id], false)
+      end
     else
-      redirect_to login_path
+      redirect_back login_path
     end
-
   end
+
+=begin
+
+  def index
+    if logged_in? and params[:search]
+      @users = User.where('name LIKE ?', params[:search]).where("id != ? AND is_admin = ?", current_user[:id], false)
+      puts("In 1st method")
+    else
+      if logged_in?
+        @users = User.where("id != ? AND is_admin = ?", current_user[:id], false)
+        puts("In 1st method")
+      else
+        puts("In 1st method")
+        redirect_to login_path
+      end
+    end
+  end
+=end
 
   # GET /users/1
   # GET /users/1.json
@@ -24,6 +46,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
+
   # GET /friends/1
   def show_friends
     if logged_in?
@@ -46,11 +69,11 @@ class UsersController < ApplicationController
 
   def add_friends
     if logged_in?
-      if Friend.exists?(user_id: current_user[:id],friend_id: params[:id], fname: params[:name])
+      if Friend.exists?(user_id: current_user[:id], friend_id: params[:id], fname: params[:name])
         flash[:notice] = "Friend already in your list"
         redirect_to friends_path(current_user)
       else
-        f = Friend.new(user_id: current_user[:id],friend_id: params[:id], fname: params[:name])
+        f = Friend.new(user_id: current_user[:id], friend_id: params[:id], fname: params[:name])
         if f.save
           flash[:notice] = "New Friend Added"
           redirect_to friends_path(current_user)
@@ -58,6 +81,7 @@ class UsersController < ApplicationController
       end
     end
   end
+
   # GET /users/1/edit
   def edit
   end
@@ -100,7 +124,7 @@ class UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+  # Use callbacks to share common setup or constraints between actions.
   def logged_in_user
     unless logged_in?
       flash[:danger] = "Please log in."
@@ -110,17 +134,17 @@ class UsersController < ApplicationController
 
 
   # Confirms the correct user.
-    def correct_user
-      @user = User.find(current_user[:id])
-      redirect_to(login_path) unless current_user?(@user)
-    end
+  def correct_user
+    @user = User.find(current_user[:id])
+    redirect_to(login_path) unless current_user?(@user)
+  end
 
-    def set_user
-      @user = User.find(params[:id])
-    end
+  def set_user
+    @user = User.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def user_params
-      params.require(:user).permit(:name, :email, :password, :phone, :is_admin)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def user_params
+    params.require(:user).permit(:name, :email, :password, :phone, :is_admin)
+  end
 end

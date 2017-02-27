@@ -9,4 +9,12 @@ class User < ApplicationRecord
   has_many  :accounts
   has_many  :friends
 
+  def self.search(search)
+    if search
+      where('name LIKE ? and id != ? AND is_admin = ?', "%#{search}%", current_user[:id], false)
+    else
+      where('id != ? AND is_admin = ?', current_user[:id], false)
+    end
+  end
+
 end
