@@ -5,7 +5,7 @@
   <thead>
   <tr>
     <th>Account</th>
-    <th>User Name</th>
+    <th>User</th>
     <th>Balance</th>
     <th colspan="3"></th>
   </tr>
@@ -31,7 +31,7 @@
   <thead>
   <tr>
     <th>Account</th>
-    <th>User Name</th>
+    <th>User</th>
     <th>Balance</th>
     <th colspan="3"></th>
   </tr>
@@ -45,7 +45,7 @@
         <td><%= account.balance %></td>
         <td><%= button_to 'Deactivate', change_state_account_path(id: account.id, chg_state: :inactive) , method: :post, class: "btn btn-warning" %></td>
         <td><%= button_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
-        <td><%= button_to 'Transaction History', view_trans(id: account.id) , method: :post, class: "btn btn-primary" %></td>
+        <td><%= button_to 'Transaction History', view_trans_path(id: account.id) , method: :post, class: "btn btn-primary" %></td>
       </tr>
   <% end %>
   </tbody>
