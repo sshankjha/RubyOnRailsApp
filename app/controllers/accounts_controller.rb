@@ -7,7 +7,7 @@ class AccountsController < ApplicationController
     if current_user and Account.find_by_user_id(current_user[:id])
       @accounts = Account.where(current_user[:id])
     else
-      flash[:notice] = 'No accounts to View. Request one'
+      flash[:notice] = 'No accounts to view. Request one'
       redirect_to user_path, {:id => current_user[:id]}
     end
   end
@@ -18,7 +18,7 @@ class AccountsController < ApplicationController
     if current_user and Account.find_by_user_id(current_user[:id])
       @accounts = Account.where(user_id: current_user[:id])
     else
-      flash[:notice] = 'No accounts to View. Request one'
+      flash[:notice] = 'No accounts to view. Request one'
       redirect_to user_path
     end
   end
