@@ -25,7 +25,7 @@ development:
   <<: *default
   database: bankapp_development
   username: postgres
-  password: password
+  password: Niviaksh3&
   host: localhost
   port: 5432
 
@@ -63,7 +63,7 @@ test:
   <<: *default
   database: bankapp_test
   username: postgres
-  password: password
+  password: Niviaksh3&
   host: localhost
   port: 5432
 
@@ -90,6 +90,6 @@ production:
   <<: *default
   database: bankapp_production
   username: postgres
-  password: password
+  password: Niviaksh3&
   host: localhost
   port: 5432

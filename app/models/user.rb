@@ -16,5 +16,5 @@ class User < ApplicationRecord
       where('id != ? AND is_admin = ?', current_user[:id], false)
     end
   end
-
+#
 end

@@ -17,10 +17,11 @@
         <td><%= account.balance %></td>
         <td><%= account.state.capitalize %></td>
         <% if account.state == 'active' %>
-            <td><%= button_to 'Deposit', view_trans_path(), class: "btn btn-primary custom2" %></td>
-            <td><%= button_to 'Withdraw', view_trans_path(), class: "btn btn-primary custom2" %></td>
+            <td><%#= button_to 'Deposit', view_trans_path(), class: "btn btn-primary custom2" %></td>
+            <td><%#= button_to 'Withdraw', view_trans_path(), class: "btn btn-primary custom2" %></td>
+            <td><%= link_to 'transfer', new_transaction_path(:from => account.acc_no), class: "btn btn-primary custom2" %></td>
+            <td><%= link_to 'View Transactions', transactions_path, method: :get,class: "btn btn-primary custom1" %></td>
         <% end %>
-        <td><%= button_to 'View Transactions', view_trans_path(), method: :get,class: "btn btn-primary custom1" %></td>
         <td><%= button_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger custom2" %></td>
       </tr>
   <% end %>

@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>From:</strong>
+  <%= @transaction.from %>
+</p>
+
+<p>
+  <strong>To:</strong>
+  <%= @transaction.to %>
+</p>
+
+<p>
+  <strong>Kind:</strong>
+  <%= @transaction.kind %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @transaction.state %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @transaction.amount %>
+</p>
+
+<p>
+  <strong>User:</strong>
+  <%= @transaction.user_id %>
+</p>
+
+<p>
+  <strong>Added:</strong>
+  <%= @transaction.added %>
+</p>
+
+<p>
+  <strong>Confirmed:</strong>
+  <%= @transaction.confirmed %>
+</p>
+
+<%= link_to 'Edit', edit_transaction_path(@transaction) %> |
+<%= link_to 'Back', transactions_path %>

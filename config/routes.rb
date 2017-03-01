@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :transactions
   get 'sessions/new'
   get '/friends/:id', to: 'users#show_friends', as: 'friends'
   post '/friends/:id', to: 'users#add_friends', as: 'add_friends'

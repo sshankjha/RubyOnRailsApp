@@ -1,0 +1,42 @@
+<%= form_for(transaction) do |f| %>
+  <% if transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% transaction.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :from %>
+    <%= f.number_field :from, :value => @transaction.from,:readonly => true %>
+  </div>
+
+  <div class="field">
+    <%= f.label :to %>
+    <%= f.select :to, options_from_collection_for_select(@final,:acc_no,:acc_no) %>
+    <%#= f.collection_select (:to,@list,:acc_no,:acc_no) %>
+  </div>
+
+  <div class="field">
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+  </div>
+
+  <div class="field">
+    <%= f.label :user_id %>
+    <%= f.number_field :user_id, :value => @transaction.user_id,:readonly => true  %>
+  </div>
+
+    <%= f.hidden_field :state, :value => @transaction.state %>
+    <%= f.hidden_field :kind, :value => @transaction.kind %>
+    <%= f.hidden_field :added, :value => Time.now %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

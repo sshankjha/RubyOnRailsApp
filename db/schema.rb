@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170225084720) do
+ActiveRecord::Schema.define(version: 20170301044108) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,14 +33,16 @@ ActiveRecord::Schema.define(version: 20170225084720) do
   end
 
   create_table "transactions", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "from",       null: false
-    t.integer "to",         null: false
-    t.integer "status"
-    t.integer "0"
-    t.integer "trans_type", null: false
-    t.float   "amount",     null: false
-    t.index ["user_id"], name: "index_transactions_on_user_id", using: :btree
+    t.integer  "from"
+    t.integer  "to"
+    t.integer  "kind"
+    t.integer  "state"
+    t.decimal  "amount"
+    t.integer  "user_id"
+    t.datetime "added"
+    t.datetime "confirmed"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -48,7 +50,7 @@ ActiveRecord::Schema.define(version: 20170225084720) do
     t.string   "email",                           null: false
     t.string   "password_digest",                 null: false
     t.string   "phone"
-    t.boolean  "is_admin",                        default: false
+    t.boolean  "is_admin",        default: false
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
   end
