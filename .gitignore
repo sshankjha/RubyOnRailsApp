@@ -22,5 +22,6 @@
 
 config/database.yml
 
-.idea/workspace.xml
-**/.idea/
+/.idea/workspace.xml
+/.idea/BankApp.iml
+/.idea/.rakeTasks

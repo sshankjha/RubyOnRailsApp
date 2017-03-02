@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="Rails BankApp: production" uuid="2df9fa21-7913-440e-8e64-26ed4c39a238">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <user-name>postgres</user-name>
+      <user-password>dfe4dfc3dfdcdfc3dfcbdfc1dfd9dfc2df99df8c</user-password>
+    </data-source>
+    <data-source name="Rails BankApp: test" uuid="ef2bed01-3314-42ff-ae43-467e8e7fa21e">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <user-name>postgres</user-name>
+      <user-password>dfe4dfc3dfdcdfc3dfcbdfc1dfd9dfc2df99df8c</user-password>
+    </data-source>
+    <data-source name="Rails BankApp: development" uuid="36383f4e-a661-4e6d-83b6-0f01bce9e138">
+      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
+      <first-sync>true</first-sync>
+      <user-name>postgres</user-name>
+      <user-password>dfe4dfc3dfdcdfc3dfcbdfc1dfd9dfc2df99df8c</user-password>
+    </data-source>
+  </component>
+</project>
