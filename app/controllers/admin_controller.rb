@@ -77,6 +77,10 @@ class AdminController < ApplicationController
     @admins = User.where("id != ? AND is_admin = ?", current_user[:id], true)
   end
 
+  def view_users
+    @users = User.where("is_admin = ?", false)
+  end
+
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_user

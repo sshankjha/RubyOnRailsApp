@@ -24,4 +24,8 @@ module SessionsHelper
   def current_user?(user)
     user == current_user
   end
+
+  def is_admin?
+    User.find_by(id: current_user[:id]).is_admin
+  end
 end
