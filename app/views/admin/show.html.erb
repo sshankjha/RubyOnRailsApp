@@ -1,32 +1,32 @@
 <%= javascript_include_tag "application" %>
 
 <div class="col-sm-6">
-<div class="jumbotron">
+  <div class="jumbotron">
 
-  <p>
-    <strong>Name:</strong>
-    <%= @user.name %>
-  </p>
+    <p>
+      <strong>Name:</strong>
+      <%= @user.name %>
+    </p>
 
-  <p>
-    <strong>Email:</strong>
-    <%= @user.email %>
-  </p>
+    <p>
+      <strong>Email:</strong>
+      <%= @user.email %>
+    </p>
 
-  <p>
-    <strong>Phone:</strong>
-    <%= @user.phone %>
-  </p>
+    <p>
+      <strong>Phone:</strong>
+      <%= @user.phone %>
+    </p>
   </div>
 </div>
 
 <div class="col-sm-4">
   <br><br>
-<%= button_to "Show All Accounts", show_accounts_path, method: :get, class: "btn btn-primary custom3"%>
-<br>
-<%= button_to "Show Pending Transactions", show_ptrans_path, method: :get, class: "btn btn-primary custom3"%>
+  <%= button_to "Show All Accounts", show_accounts_path, method: :get, class: "btn btn-primary custom3" %>
   <br>
-  <%= button_to "Create Admin", signup_path, method: :get, class: "btn btn-primary custom3"%>
+  <%= button_to "Show Pending Transactions", show_ptrans_path, method: :get, class: "btn btn-primary custom3" %>
+  <br>
+  <%= button_to "Create Admin", signup_path, method: :get, class: "btn btn-primary custom3" %>
   <br>
   <%= button_to "View all Admins", view_admins_path, method: :get, class: "btn btn-primary custom3" %>
 </div>
