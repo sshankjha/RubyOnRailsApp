@@ -14,27 +14,50 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/new
   def new
-    @final = Account.new
     @transaction = Transaction.new
     @transaction.from = params[:from]
-    @transaction.kind=2
-    @transaction.state=0
+    @transaction.kind = params[:kind]
+    @final = Account.new
     @account=Account.new
-    @account=Account.find_by(:acc_no => params[:from])
-    @transaction.user_id = @account.user_id
     @friend=Friend.new
-    @friend=Friend.where(:user_id => @transaction.user_id)
-    @list=[]
-    @friend.pluck(:friend_id).each do |i|
-      @account=Account.where(:user_id => i)
-      #flash[:i] = "printing"
+    if @transaction.kind == 'transfer'
+      @transaction.state = 'accepted'
+      @account=Account.find_by(:acc_no => params[:from])
+      @transaction.user_id = @account.user_id
+      @friend=Friend.where(:user_id => @transaction.user_id)
+      if @friend.empty?
+        redirect_to account_path(:id => @transaction.user_id),  notice: 'Transfer not possible because you have not added any friends'
+        return
+      end
+      @list=[]
+      @friend.pluck(:friend_id).each do |i|
+        @account=Account.where(:user_id => i)
+        #flash[:i] = "printing"
+        @account.each do |x|
+          #flash[:x] = "printing"
+          @list.push(x)
+        end
+      end
+      @account=Account.where(:user_id => @transaction.user_id)
       @account.each do |x|
-        #flash[:x] = "printing"
-        @list.push(x)
+        if x.acc_no != @transaction.from
+          @list.push(x)
+      end
+      @final=@list
       end
     end
+    if @transaction.kind == 'deposit'
+      @transaction.state = 'pending'
+      @account=Account.find_by(:acc_no => params[:from])
+      @transaction.user_id = @account.user_id
+      @transaction.to=@transaction.from
+    end
+    if @transaction.kind == 'withdraw'
+      @account=Account.find_by(:acc_no => params[:from])
+      @transaction.user_id = @account.user_id
+      @transaction.to=@transaction.from
 
-    @final=@list
+    end
   end
 
   # GET /transactions/1/edit
@@ -45,7 +68,39 @@ class TransactionsController < ApplicationController
   # POST /transactions.json
   def create
     @transaction = Transaction.new(transaction_params)
-
+    @account1 = Account.new
+    @account2 = Account.new
+    @temp=0.0
+    if @transaction.kind == 'transfer'
+      @account1=Account.find_by(:acc_no => @transaction.from)
+      @account2=Account.find_by(:acc_no => @transaction.to)
+      @temp=@account1.balance-@transaction.amount
+      if @temp < 0
+        @temp = -1 * @temp
+        redirect_to account_path(:id => @transaction.user_id),  notice: 'Cannot transfer because of insufficient funds. You are $'+@temp.to_s+' short'
+        return
+      end
+      @account1.update_attribute(:balance,@temp)
+      @temp=@account2.balance+@transaction.amount
+      @account2.update_attribute(:balance,@temp)
+      @transaction.confirmed = Time.now
+    end
+    if @transaction.kind == 'withdraw'
+      @account1=Account.find_by(:acc_no => @transaction.from)
+      @temp=@account1.balance-@transaction.amount
+      if @temp < 0
+        @temp = -1 * @temp
+        redirect_to account_path(:id => @transaction.user_id),  notice: 'Cannot withdraw because of insufficient funds. You are $'+@temp.to_s+' short'
+        return
+      end
+      if @transaction.amount < 1000
+        @account1.update_attribute(:balance,@temp)
+        @transaction.confirmed = Time.now
+        @transaction.state = 'accepted'
+      else
+        @transaction.state = 'pending'
+      end
+    end
     respond_to do |format|
       if @transaction.save
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }

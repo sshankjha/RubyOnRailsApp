@@ -16,11 +16,17 @@
     <%= f.number_field :from, :value => @transaction.from,:readonly => true %>
   </div>
 
-  <div class="field">
-    <%= f.label :to %>
-    <%= f.select :to, options_from_collection_for_select(@final,:acc_no,:acc_no) %>
-    <%#= f.collection_select (:to,@list,:acc_no,:acc_no) %>
-  </div>
+  <% if @transaction.kind == 'transfer' %>
+        <div class="field">
+        <%= f.label :to %>
+        <%= f.select :to, options_from_collection_for_select(@final,:acc_no,:acc_no) %>
+        <%#= f.collection_select (:to,@list,:acc_no,:acc_no) %>
+        </div>
+  <% end %>
+
+    <% if @transaction.kind != 'transfer' %>
+        <%= f.hidden_field :to, :value => @transaction.from %>
+    <% end %>
 
   <div class="field">
     <%= f.label :amount %>
@@ -35,6 +41,7 @@
     <%= f.hidden_field :state, :value => @transaction.state %>
     <%= f.hidden_field :kind, :value => @transaction.kind %>
     <%= f.hidden_field :added, :value => Time.now %>
+
 
   <div class="actions">
     <%= f.submit %>
