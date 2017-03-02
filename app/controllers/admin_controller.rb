@@ -71,7 +71,7 @@ class AdminController < ApplicationController
       if @transaction.update_attributes(state: :accepted)
         @account = Account.find_by_acc_no(@transaction.from)
         curB = @account.balance
-        @account.update_attributes(balance: @transaction.amount+curB)
+        @account.update_attributes(balance: @transaction.amount - curB)
         flash[:success] = "Transaction was accepted!"
       end
     end
