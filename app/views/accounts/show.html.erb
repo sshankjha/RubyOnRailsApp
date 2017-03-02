@@ -30,4 +30,9 @@
 
 <br>
 
-<%= button_to 'Back', current_user, method: :get, class: "btn btn-primary col1" %>
+<% if is_admin? %>
+    <%= button_to 'Back', admin_path(current_user[:id]), method: :get, class: "btn btn-primary col1" %>
+<% else %>
+    <%= button_to 'Back', current_user, method: :get, class: "btn btn-primary col1" %>
+
+<% end %>
