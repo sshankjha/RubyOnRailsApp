@@ -22,4 +22,5 @@
 
 config/database.yml
 
-/.idea/*
+.idea/workspace.xml
+**/.idea/
