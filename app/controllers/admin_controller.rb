@@ -62,23 +62,25 @@ class AdminController < ApplicationController
   end
 
   def manage_transaction
-    @transaction = Transaction.find(params[:id])
+    @transaction = Transaction.find(params[:id]
+    @transaction.confirmed = Time.now
     if params[:chg_state] == :rejected.to_s
       if @transaction.update_attributes(state: :rejected)
-        @transaction.confirmed = Time.now
         flash[:danger] = "Transaction was rejected!"
       end
     else
       if @transaction.update_attributes(state: :accepted)
-        @transaction.confirmed = Time.now
         @account = Account.find_by_acc_no(@transaction.from)
         curB = @account.balance
         if @transaction.kind == 'deposit'
           @account.update_attributes(balance: curB + @transaction.amount)
+          flash[:success] = "Transaction was accepted!"
+        else if (curB - @transaction.amount < 0)
+          flash[:danger] = "Transaction was rejected because of lack of available balance!"
         else
           @account.update_attributes(balance: curB - @transaction.amount)
+          flash[:success] = "Transaction was accepted!"
         end
-        flash[:success] = "Transaction was accepted!"
       end
     end
     redirect_to :back
