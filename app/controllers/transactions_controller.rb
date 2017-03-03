@@ -4,7 +4,11 @@ class TransactionsController < ApplicationController
   # GET /transactions
   # GET /transactions.json
   def index
-    @transactions = Transaction.where(:from => params[:from])
+      @transactions = Transaction.where(:from => params[:from])
+  end
+
+  def index_user
+    @transactions = Transaction.where(:user_id => params[:user_id])
   end
 
   # GET /transactions/1
