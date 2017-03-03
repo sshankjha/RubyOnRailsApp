@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+
+<p>
+  <strong>Friend name:</strong>
+  <%= @borrow.friend_name %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @borrow.amount %>
+</p>
+
+<p>
+  <strong>Your Account:</strong>
+  <%= @borrow.from_acc %>
+</p>
+
+<p>
+  <strong>Friend's account:</strong>
+  <%= @borrow.to_acc %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= @borrow.state %>
+</p>
+
+
+
+|
+<%= link_to 'Back', user_path(:id => current_user[:id]) %>

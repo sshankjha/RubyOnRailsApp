@@ -1,0 +1,36 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Borrows</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Friend name</th>
+      <th>Their account number</th>
+      <th>Your account number</th>
+      <th>Amount</th>
+      <th>State</th>
+      <th colspan="0"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @borrows.each do |borrow| %>
+      <tr>
+        <% if borrow.state == 'pending' %>
+          <td><%= borrow.user_name %></td>
+          <td><%= borrow.from_acc %></td>
+          <td><%= borrow.to_acc %></td>
+          <td><%= borrow.amount %></td>
+          <td><%= borrow.state %></td>
+          <td><%= link_to 'Accept', accept_offer_path(:borrow_id => borrow.id) %></td>
+          <td><%= link_to 'Reject', reject_offer_path(:borrow_id => borrow.id) %></td>
+        <%end%>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+

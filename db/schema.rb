@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301044108) do
+ActiveRecord::Schema.define(version: 20170303170351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,19 @@ ActiveRecord::Schema.define(version: 20170301044108) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_accounts_on_user_id", using: :btree
+  end
+
+  create_table "borrows", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "friend_id"
+    t.string   "friend_name"
+    t.decimal  "amount"
+    t.integer  "state"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.string   "user_name"
+    t.integer  "from_acc"
+    t.integer  "to_acc"
   end
 
   create_table "friends", primary_key: ["user_id", "friend_id"], force: :cascade do |t|

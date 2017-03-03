@@ -15,7 +15,7 @@
   <% @pending_accounts.each do |account| %>
       <tr>
         <td><%= account.acc_no %></td>
-        <td><%= account.user_id %></td>
+        <td><%= account.user.name %></td>
         <td><%= account.balance %></td>
         <td><%= button_to 'Activate', change_state_account_path(id: account.id, chg_state: :active), method: :post, class: "btn btn-primary" %></td>
         <td><%= button_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>
@@ -41,7 +41,7 @@
   <% @activated_accounts.each do |account| %>
       <tr>
         <td><%= account.acc_no %></td>
-        <td><%= account.user_id %></td>
+        <td><%= account.user.name %></td>
         <td><%= account.balance %></td>
         <td><%= button_to 'Deactivate', change_state_account_path(id: account.id, chg_state: :inactive) , method: :post, class: "btn btn-warning" %></td>
         <td><%= button_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %></td>

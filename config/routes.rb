@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :borrows
   resources :transactions
   get 'sessions/new'
   get '/friends/:id', to: 'users#show_friends', as: 'friends'
@@ -24,5 +25,7 @@ Rails.application.routes.draw do
   post   '/login',   to: 'sessions#create'
   delete '/logout', to: 'sessions#log_out'
   get '/index_user', to: 'transactions#index_user', as: 'user_trans'
+  get '/accept_offer', to: 'borrows#accept_offer', as: 'accept_offer'
+  get '/reject_offer', to: 'borrows#reject_offer', as: 'reject_offer'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

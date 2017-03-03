@@ -28,7 +28,7 @@
   <br>
   <%= button_to 'View your Friends', friends_path(@user), method: :get, class: "btn btn btn-info custom3"%>
   <br>
-  <%= button_to 'View all your transactions', show_trans_path(@user.id), method: :get, class: "btn btn btn-info custom3"%>
+  <%= link_to 'View your borrow requests', borrows_path(:user_id => @user.id), method: :get, class: "btn btn btn-info custom3"%>
 </div>
 </div>
 

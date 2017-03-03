@@ -1,0 +1,46 @@
+<%= form_for(borrow) do |f| %>
+  <% if borrow.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(borrow.errors.count, "error") %> prohibited this borrow from being saved:</h2>
+
+      <ul>
+      <% borrow.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <%= f.hidden_field :user_id, :value => @borrow.user_id %>
+
+    <%= f.hidden_field :friend_id, :value => @borrow.friend_id %>
+
+  <div class="field">
+    <%= f.label :friend_name %>
+    <%= f.text_field :friend_name, :value => @borrow.friend_name,:readonly => true  %>
+  </div>
+
+    <div class="field">
+      <%= f.label :from_acc %>
+      <%= f.select :from_acc, options_from_collection_for_select(@list2,:acc_no,:acc_no) %>
+      <%#= f.collection_select (:to,@list,:acc_no,:acc_no) %>
+    </div>
+
+    <div class="field">
+      <%= f.label :to_acc %>
+      <%= f.select :to_acc, options_from_collection_for_select(@list,:acc_no,:acc_no) %>
+      <%#= f.collection_select (:to,@list,:acc_no,:acc_no) %>
+    </div>
+
+  <div class="field">
+    <%= f.label :amount %>
+    <%= f.text_field :amount %>
+  </div>
+
+    <%= f.hidden_field :state, :value => @borrow.state %>
+    <%= f.hidden_field :user_name, :value => @borrow.user_name %>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

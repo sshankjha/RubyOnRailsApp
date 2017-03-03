@@ -12,6 +12,7 @@
     <% @friends.each do |friend| %>
         <tr>
           <td><%= friend.fname.capitalize %></td>
+          <td><%= link_to 'Borrow request', new_borrow_path(:user_id => friend.user_id, :friend_id => friend.friend_id ) %></td>
         </tr>
     <% end %>
   <% end %>
