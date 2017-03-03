@@ -36,7 +36,7 @@ class AccountsController < ApplicationController
     @account = Account.new(acc_no: 100_000_000 + Random.rand(99_999_999) ,balance: 0.0, state: 0, user_id: current_user[:id])
     respond_to do |format|
       if @account.save
-        format.html { redirect_to @account, notice: 'Account was successfully requested.' }
+        format.html { redirect_to @current_user, notice: 'Account was successfully requested.' }
         format.json { render :show, status: :created, location: @account }
       else
         format.html { render :new }

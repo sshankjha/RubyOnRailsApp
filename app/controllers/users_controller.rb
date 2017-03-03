@@ -123,6 +123,8 @@ class UsersController < ApplicationController
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
+    a = Account.where(user_id: params[:id])
+    a.delete_all
     User.find(params[:id]).destroy
     redirect_to admin_path(current_user[:id])
   end
