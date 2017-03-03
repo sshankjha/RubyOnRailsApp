@@ -125,6 +125,12 @@ class UsersController < ApplicationController
   def destroy
     a = Account.where(user_id: params[:id])
     a.delete_all
+    t = Transaction.where(:user_id => params[:id])
+    t.delete_all
+    b = Borrow.where(["user_id = ? or friend_id = ?", params[:id], params[:id]])
+    b.delete_all
+    f = Friend.where(:friend_id => params[:id])
+    f.delete_all
     User.find(params[:id]).destroy
     redirect_to admin_path(current_user[:id])
   end

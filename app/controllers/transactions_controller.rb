@@ -42,13 +42,17 @@ class TransactionsController < ApplicationController
         #flash[:i] = "printing"
         @account.each do |x|
           #flash[:x] = "printing"
-          @list.push(x)
+          if x.state == 'active'
+            @list.push(x)
+          end
         end
       end
       @account=Account.where(:user_id => @transaction.user_id)
       @account.each do |x|
         if x.acc_no != @transaction.from
-          @list.push(x)
+          if x.state == 'active'
+            @list.push(x)
+          end
       end
       @final=@list
       end

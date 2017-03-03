@@ -131,9 +131,9 @@
   <% @borrows.each do |borrow| %>
       <tr>
         <% if borrow.state == 'accepted' && borrow.user_id == current_user[:id] %>
-            <td><%= borrow.user_name %></td>
-            <td><%= borrow.from_acc %></td>
+            <td><%= borrow.friend_name %></td>
             <td><%= borrow.to_acc %></td>
+            <td><%= borrow.from_acc %></td>
             <td><%= borrow.amount %></td>
             <td><%= borrow.state %></td>
         <%end%>

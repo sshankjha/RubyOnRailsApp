@@ -17,6 +17,9 @@ class BorrowsController < ApplicationController
     @borrow = Borrow.new
     @borrow.user_id = params[:user_id]
     @borrow.friend_id = params[:friend_id]
+    if Account.where(:user_id => params[:friend_id]).empty?
+      redirect_to borrows_path(:user_id => current_user[:id]),  notice: 'That person has no accounts'
+    end
     @borrow.state ='pending'
     @borrow.friend_name = User.find_by(:id => @borrow.friend_id).name
     @borrow.user_name = User.find_by(:id => @borrow.user_id).name
