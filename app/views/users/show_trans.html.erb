@@ -18,8 +18,8 @@
             <td><%= transaction.from %></td>
             <td><%= transaction.to %></td>
             <td><%= transaction.amount%></td>
-            <td><%= transaction.type%></td>
-            <td><%= transaction.status%></td>
+            <td><%= transaction.kind.upcase_first%></td>
+            <td><%= transaction.state.upcase_first%></td>
           </tr>
       <% end %>
   <% end %>

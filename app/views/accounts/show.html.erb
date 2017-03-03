@@ -16,12 +16,12 @@
         <td><%= account.acc_no %></td>
         <td><%= account.balance %></td>
         <td><%= account.state.capitalize %></td>
-        <% if account.state == 'active' and !is_admin?%>
-            <td><%= link_to 'Deposit', new_transaction_path(:from => account.acc_no,:kind => 'deposit'), class: "btn btn-primary custom2" %></td>
-            <td><%= link_to 'Withdraw', new_transaction_path(:from => account.acc_no,:kind => 'withdraw'), class: "btn btn-primary custom2" %></td>
-            <td><%= link_to 'transfer', new_transaction_path(:from => account.acc_no,:kind => 'transfer'), class: "btn btn-primary custom2" %></td>
-            <td><%= link_to 'View Transactions', transactions_path, method: :get,class: "btn btn-primary custom1" %></td>
+        <% if account.state == 'active' and !is_admin? %>
+            <td><%#= button_to 'Deposit', view_trans_path(), class: "btn btn-primary custom2" %></td>
+            <td><%#= button_to 'Withdraw', view_trans_path(), class: "btn btn-primary custom2" %></td>
+            <td><%= link_to 'Transfer', new_transaction_path(:from => account.acc_no), class: "btn btn-primary custom2" %></td>
         <% end %>
+        <td><%= link_to 'View Transactions', transactions_path, method: :get,class: "btn btn-primary custom1" %></td>
         <td><%= button_to 'Destroy', account, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger custom2" %></td>
       </tr>
   <% end %>
@@ -29,10 +29,9 @@
 </table>
 
 <br>
-
 <% if is_admin? %>
     <%= button_to 'Back', admin_path(current_user[:id]), method: :get, class: "btn btn-primary col1" %>
 <% else %>
-    <%= button_to 'Back', current_user, method: :get, class: "btn btn-primary col1" %>
+  <%= button_to 'Back', current_user, method: :get, class: "btn btn-primary col1" %>
 
 <% end %>

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get '/admin/new', to: 'admin#new', as: 'new_admin'
   post '/admin', to: 'admin#create', as: 'admins'
   get '/view_admins', to:'admin#view_admins', as: 'view_admins'
+  get '/view_users', to:'admin#view_users', as:'view_users'
   resources :accounts
   resources :users
   get '/contact', to: 'static_pages#contact'

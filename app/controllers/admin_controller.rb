@@ -1,8 +1,8 @@
 class AdminController < ApplicationController
   before_action :logged_in_user, only: [:index, :edit, :update]
-  before_action :correct_user,   only: [:edit, :update]
+  before_action :correct_user, only: [:edit, :update]
   before_action :set_user, only: [:show, :edit, :update, :destroy]
-  before_action :admin_user,     only: :destroy
+  before_action :admin_user, only: :destroy
 
 
   def index
@@ -58,23 +58,32 @@ class AdminController < ApplicationController
   end
 
   def show_ptrans
-    @pending_accounts = Account.where(state: :pending)
+    @pending_trans = Transaction.where(state: :pending)
   end
 
   def manage_transaction
-    @transaction = params[:t]
-    if params[:chg_state] == :rejected
-      @transaction.update_attributes(state: :rejected)
+    @transaction = Transaction.find(params[:id])
+    if params[:chg_state] == :rejected.to_s
+      if @transaction.update_attributes(state: :rejected)
+        flash[:danger] = "Transaction was rejected!"
+      end
     else
-      @transaction.update_attributes(state: :accepted)
-      @account = Account.find_by_acc_no(t.from)
-      curB = @account.balance
-      @account.update_attributes(balance: t.amount+curB)
-
+      if @transaction.update_attributes(state: :accepted)
+        @account = Account.find_by_acc_no(@transaction.from)
+        curB = @account.balance
+        @account.update_attributes(balance: @transaction.amount - curB)
+        flash[:success] = "Transaction was accepted!"
+      end
     end
+    redirect_to :back
   end
+
   def view_admins
     @admins = User.where("id != ? AND is_admin = ?", current_user[:id], true)
+  end
+
+  def view_users
+    @users = User.where("is_admin = ?", false)
   end
 
   private
@@ -110,3 +119,4 @@ class AdminController < ApplicationController
   end
 
 end
+

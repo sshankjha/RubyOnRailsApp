@@ -3,8 +3,6 @@
 <table class="table table-striped" >
   <thead>
   <tr>
-    <th>ID</th><br>
-    <th></th>
     <th>Name</th>
   </tr>
   </thead>
@@ -13,8 +11,6 @@
   <% if @friends %>
     <% @friends.each do |friend| %>
         <tr>
-          <td><%= friend.friend_id %></td>
-          <td></td>
           <td><%= friend.fname.capitalize %></td>
         </tr>
     <% end %>

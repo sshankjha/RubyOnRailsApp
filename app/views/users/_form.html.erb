@@ -32,10 +32,6 @@
             <%= f.label :phone %>
             <%= f.number_field :phone, class: 'form-control' %>
           </div>
-          <% if logged_in? and current_user[:is_admin] == true %>
-              <%= f.label :is_admin %>
-              <%= f.check_box :is_admin, {}, true, false %>
-          <% end %>
           <div class="actions">
             <%= f.submit class: "btn btn-primary" %>
           </div>

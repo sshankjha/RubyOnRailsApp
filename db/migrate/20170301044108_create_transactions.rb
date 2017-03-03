@@ -9,7 +9,6 @@ class CreateTransactions < ActiveRecord::Migration[5.0]
       t.integer :user_id
       t.datetime :added
       t.datetime :confirmed
-
       t.timestamps
     end
   end

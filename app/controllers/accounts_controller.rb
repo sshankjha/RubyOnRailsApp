@@ -15,8 +15,8 @@ class AccountsController < ApplicationController
   # GET /accounts/1
   # GET /accounts/1.json
   def show
-    if current_user and Account.find_by_user_id(current_user[:id])
-      @accounts = Account.where(user_id: current_user[:id])
+    if current_user and Account.find_by_user_id(params[:id])
+      @accounts = Account.where(user_id: params[:id])
     else
       flash[:notice] = 'No accounts to view. Request one.'
       redirect_to user_path
