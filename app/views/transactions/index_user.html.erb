@@ -1,0 +1,40 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Transactions</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>From</th>
+    <th>To</th>
+    <th>Kind</th>
+    <th>State</th>
+    <th>Amount</th>
+    <th>Added</th>
+    <th>Confirmed</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @transactions.each do |transaction| %>
+      <tr>
+        <td><%= transaction.from %></td>
+        <td><%= transaction.to %></td>
+        <td><%= transaction.kind %></td>
+        <td><%= transaction.state %></td>
+        <td><%= transaction.amount %></td>
+        <td><%= transaction.added %></td>
+        <td><%= transaction.confirmed %></td>
+        <td><%= link_to 'Show', transaction %></td>
+        <% if transaction.state == 'pending' %>
+            <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+  <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Back', admin_path(:id => current_user[:id]) %>

@@ -33,14 +33,11 @@
     <%= f.text_field :amount %>
   </div>
 
-  <div class="field">
-    <%= f.label :user_id %>
-    <%= f.number_field :user_id, :value => @transaction.user_id,:readonly => true  %>
-  </div>
 
     <%= f.hidden_field :state, :value => @transaction.state %>
     <%= f.hidden_field :kind, :value => @transaction.kind %>
     <%= f.hidden_field :added, :value => Time.now %>
+    <%= f.hidden_field :user_id, :value => @transaction.user_id %>
 
 
   <div class="actions">
