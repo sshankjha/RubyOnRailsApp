@@ -5,6 +5,7 @@ class TransactionsController < ApplicationController
   # GET /transactions.json
   def index
       @transactions = Transaction.where(:from => params[:from])
+      @transactions2 = Transaction.where(:to => params[:from])
       @lends = Borrow.where(:to_acc => params[:from])
       @borrows = Borrow.where(:from_acc => params[:from])
   end

@@ -1,13 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Transactions</h1>
+<h1>Transfers on this account</h1>
 
 <table class="table table-striped">
   <thead>
     <tr>
       <th>From</th>
       <th>To</th>
-      <th>Kind</th>
       <th>State</th>
       <th>Amount</th>
       <th>Added</th>
@@ -19,19 +18,69 @@
   <tbody>
     <% @transactions.each do |transaction| %>
       <tr>
-        <td><%= transaction.from %></td>
-        <td><%= transaction.to %></td>
-        <td><%= transaction.kind.capitalize %></td>
-        <td><%= transaction.state.capitalize %></td>
-        <td><%= transaction.amount %></td>
-        <td><%= transaction.added %></td>
-        <td><%= transaction.confirmed %></td>
-        <td><%= link_to 'Show', transaction %></td>
-        <% if transaction.state == 'pending' %>
-          <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if transaction.kind == 'transfer' %>
+          <td><%= transaction.from %></td>
+          <td><%= transaction.to %></td>
+          <td><%= transaction.state.capitalize %></td>
+          <td><%= transaction.amount %></td>
+          <td><%= transaction.added %></td>
+          <td><%= transaction.confirmed %></td>
+          <td><%= link_to 'Show', transaction %></td>
+          <% if transaction.state == 'pending' %>
+            <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          <% end %>
         <% end %>
       </tr>
     <% end %>
+    <% @transactions2.each do |transaction| %>
+      <tr>
+        <% if transaction.kind == 'transfer' %>
+            <td><%= transaction.from %></td>
+            <td><%= transaction.to %></td>
+            <td><%= transaction.state.capitalize %></td>
+            <td><%= transaction.amount %></td>
+            <td><%= transaction.added %></td>
+            <td><%= transaction.confirmed %></td>
+            <td><%= link_to 'Show', transaction %></td>
+            <% if transaction.state == 'pending' %>
+                <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h1>Withdraws and deposits on this account</h1>
+
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Kind</th>
+    <th>State</th>
+    <th>Amount</th>
+    <th>Added</th>
+    <th>Confirmed</th>
+    <th colspan="0"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <% @transactions.each do |transaction| %>
+      <tr>
+        <% if transaction.kind == 'deposit' or transaction.kind == 'withdraw' %>
+            <td><%= transaction.kind.capitalize %></td>
+            <td><%= transaction.state.capitalize %></td>
+            <td><%= transaction.amount %></td>
+            <td><%= transaction.added %></td>
+            <td><%= transaction.confirmed %></td>
+            <td><%= link_to 'Show', transaction %></td>
+            <% if transaction.state == 'pending' %>
+                <td><%= link_to 'Destroy', transaction, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <% end %>
+        <% end %>
+      </tr>
+  <% end %>
   </tbody>
 </table>
 
