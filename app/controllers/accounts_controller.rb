@@ -18,8 +18,13 @@ class AccountsController < ApplicationController
     if current_user and Account.find_by_user_id(params[:id])
       @accounts = Account.where(user_id: params[:id])
     else
-      flash[:notice] = 'No accounts to view. Request one.'
-      redirect_to user_path
+      if is_admin?
+        flash[:notice] = 'No accounts to view'
+        redirect_to view_users_path
+      else
+        flash[:notice] = 'No accounts to view. Request one.'
+        redirect_to @user
+      end
     end
   end
 
