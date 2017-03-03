@@ -65,10 +65,12 @@ class AdminController < ApplicationController
     @transaction = Transaction.find(params[:id])
     if params[:chg_state] == :rejected.to_s
       if @transaction.update_attributes(state: :rejected)
+        @transaction.confirmed = Time.now
         flash[:danger] = "Transaction was rejected!"
       end
     else
       if @transaction.update_attributes(state: :accepted)
+        @transaction.confirmed = Time.now
         @account = Account.find_by_acc_no(@transaction.from)
         curB = @account.balance
         if @transaction.kind == 'deposit'
