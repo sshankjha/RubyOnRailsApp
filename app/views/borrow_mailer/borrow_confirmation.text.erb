@@ -1,0 +1,11 @@
+Hi <%= @borrow.user.name%>,
+
+Update on your borrow request:
+From  : <%= @borrow.friend_name %>
+Amount: <%= @borrow.amount %>
+State : <%= @borrow.state.capitalize %>
+Time  : <%= @borrow.updated_at %>
+
+Thank you for banking with us.
+
+The Bank App

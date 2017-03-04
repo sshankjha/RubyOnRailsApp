@@ -1,0 +1,13 @@
+Hi <%= @transaction.user.name%>,
+
+Update on your transaction request:
+From  : <%= @transaction.from %>
+To    : <%= @transaction.to %>
+Kind  : <%= @transaction.kind.capitalize %>
+Amount: <%= @transaction.amount %>
+State : <%= @transaction.state.capitalize %>
+Time  : <%= @transaction.updated_at%>
+
+Thank you for banking with us.
+
+The Bank App

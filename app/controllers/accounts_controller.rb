@@ -64,11 +64,16 @@ class AccountsController < ApplicationController
   # DELETE /accounts/1.json
   def destroy
     @account = Account.find(params[:id])
+    t = Transaction.where(:user_id => params[:id])
+    t.delete_all
+    b = Borrow.where(["user_id = ? or friend_id = ?", params[:id], params[:id]])
+    b.delete_all
     if @account.destroy
       flash[:notice] = 'Account was successfully destroyed.'
       redirect_to :back
     end
   end
+
 
   def view_trans
     if logged_in?
