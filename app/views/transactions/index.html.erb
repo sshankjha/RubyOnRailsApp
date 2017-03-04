@@ -106,7 +106,7 @@
             <td><%= borrow.from_acc %></td>
             <td><%= borrow.to_acc %></td>
             <td><%= borrow.amount %></td>
-            <td><%= borrow.state %></td>
+            <td><%= borrow.state.capitalize %></td>
         <%end%>
       </tr>
   <% end %>
@@ -135,7 +135,7 @@
             <td><%= borrow.to_acc %></td>
             <td><%= borrow.from_acc %></td>
             <td><%= borrow.amount %></td>
-            <td><%= borrow.state %></td>
+            <td><%= borrow.state.capitalize %></td>
         <%end%>
       </tr>
   <% end %>
