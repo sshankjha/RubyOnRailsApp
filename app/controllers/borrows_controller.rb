@@ -41,11 +41,13 @@ class BorrowsController < ApplicationController
     @temp=@account1.balance+@borrow.amount
     @account1.update_attribute(:balance,@temp)
     @borrow.update_attribute(:state, 'accepted')
+    BorrowMailer.borrow_confirmation(@borrow).deliver
   end
 
   def reject_offer
     @borrow = Borrow.find_by(:id => params[:borrow_id])
     @borrow.update_attribute(:state, 'rejected')
+    BorrowMailer.borrow_confirmation(@borrow).deliver
   end
 
 
@@ -67,6 +69,7 @@ class BorrowsController < ApplicationController
         format.json { render json: @borrow.errors, status: :unprocessable_entity }
       end
     end
+    BorrowMailer.borrow_confirmation(@borrow).deliver
   end
 
   # PATCH/PUT /borrows/1

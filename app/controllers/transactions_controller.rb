@@ -116,6 +116,7 @@ class TransactionsController < ApplicationController
       if @transaction.save
         format.html { redirect_to @transaction, notice: 'Transaction was successfully created.' }
         format.json { render :show, status: :created, location: @transaction }
+        TransactionMailer.transaction_confirmation(@transaction).deliver
       else
         format.html { render :new }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
@@ -130,6 +131,7 @@ class TransactionsController < ApplicationController
       if @transaction.update(transaction_params)
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
         format.json { render :show, status: :ok, location: @transaction }
+        TransactionMailer.transaction_confirmation(@transaction).deliver
       else
         format.html { render :edit }
         format.json { render json: @transaction.errors, status: :unprocessable_entity }
