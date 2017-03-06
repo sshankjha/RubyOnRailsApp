@@ -1,24 +1,12 @@
-# README
+Project description:
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+https://expertiza.ncsu.edu/submitted_content/download?current_folder%5Bname%5D=%2Flocal%2Frails%2Fexpertiza%2Freleases%2F20170228200726%2Fpg_data%2Fefg%2Fcsc517%2Fs17%2Fcsc517%2Fs17%2Fprog1%2F3&download=Final_README.pdf&id=34989
 
-Things you may want to cover:
+Please note:
 
-* Ruby version
+1. Do not change super admin password. 
+2. Use correct email id while signing up so that mails can be delivered. 
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Super Admin details:
+Email-id: super@admin.com
+Password: superadmin
